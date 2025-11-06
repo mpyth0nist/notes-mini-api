@@ -1,13 +1,13 @@
 const Note = require('../models/notes.model')
-
+const mongoose = require('mongoose')
 
 exports.getAllNotes = async () => {
     const notes = await Note.find()
     return notes;
 }
 
-exports.getNoteById = (id) => {
-    const note = Note.findById(id);
+exports.getNoteById = async (id) => {
+    const note = await Note.findById(id);
     if (!note) throw new Error('Note not found')
     return note
 }
@@ -28,9 +28,10 @@ exports.createNewNote = (data) => {
 }
 
 exports.updateNote = async (noteId, newData) => {
-    let oldNote = await this.getNoteById(noteId).toObject()
+    let oldNote = await this.getNoteById(noteId)
+    let oldNoteData = oldNote.toObject()
     Object.keys(newData).forEach(key => {
-        if(Object.hasOwn(oldNote, key)){
+        if(Object.hasOwn(oldNoteData, key)){
             oldNote[key] = newData[key]
         }
     })

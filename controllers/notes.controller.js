@@ -16,7 +16,7 @@ exports.getNote = async(req, res) => {
         const note = await notesService.getNoteById(req.params.id)
         res.status(200).json(note)
     }catch(err){
-        return res.json({ message : err.message })
+        return res.status(404).json({ message : err.message })
     }
 }
 
@@ -32,7 +32,7 @@ exports.createNote = async (req, res) => {
 exports.updateNote = async (req, res) => {
 
     try{
-        const updated = await notesService.updateNote(req.params.id)
+        const updated = await notesService.updateNote(req.params.id, req.body)
         res.status(200).json(updated)
     }catch(err) {
         return res.status(404).json({ message : err.message })
