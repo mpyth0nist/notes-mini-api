@@ -1,16 +1,16 @@
 const express = require('express')
-const controller = require('../controllers/notes.controller')
+const notesController = require('../controllers/notes.controller')
 // Calling the Router method inside Express
 const router = express.Router()
 
-router.get('/', controller.getAllNotes)
+router.get('/', notesController.getAllNotes)
 
-router.get('/:id', controller.getNoteById)
+router.get('/:id', notesController.getNote)
 
-router.post('/', controller.createNote)
+router.post('/', notesController.createNote)
 
-router.patch('/:id', controller.updateNote)
+router.patch('/:id', notesController.updateNote)
 
-router.delete('/:id', controller.deleteNote)
+router.delete('/:id', notesController.deleteNote)
 
 module.exports = router;

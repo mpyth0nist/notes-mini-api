@@ -23,7 +23,7 @@ async function main(){
     await mongoose.connect(mongoDB)
 }
 
-app.use(morgan)
+app.use(morgan('dev'))
 app.use(express.json())
 
 

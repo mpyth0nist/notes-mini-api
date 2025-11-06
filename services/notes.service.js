@@ -1,8 +1,8 @@
 const Note = require('../models/notes.model')
 
 
-exports.getAllNotes = () => {
-    const notes = Note.find({})
+exports.getAllNotes = async () => {
+    const notes = await Note.find()
     return notes;
 }
 
@@ -21,6 +21,10 @@ exports.createNewNote = (data) => {
         createdAt: data.createdAt
         
     })
+
+    const savedNote = newNote.save()
+
+    return savedNote  
 }
 
 exports.updateNote = async (noteId, newData) => {
